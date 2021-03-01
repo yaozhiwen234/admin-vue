@@ -62,7 +62,7 @@
       </span>
     </el-dialog>
     <el-dialog
-      title="修改文件标题"
+      title="修改文件标"
       :visible.sync="updateVisible"
       width="30%"
     >
