@@ -16,7 +16,7 @@
     />
 
     <el-button size="small" class="filter-item" style="width: 80px;" type="success" @click="handleFilter()">查询</el-button>
-    <el-button size="small" class="filter-item" style="width: 80px;" type="warning" @click="deploy()">发布</el-button>
+    <el-button size="small" class="filter-item" style="width: 80px;" :disabled="depl===true?false:true" type="warning" @click="deploy()">发布</el-button>
     <el-button size="small" class="filter-item" style="width: 80px;" type="primary" @click="creatTitle()">新建文章</el-button>
     <el-button size="small" class="filter-item" style="width: 80px;" :disabled="multipleSelection.length===1?false:true" type="warning" @click="updateTitle()">修改标题</el-button>
     <el-button size="small" class="filter-item" style="width: 80px;" type="danger" :disabled="multipleSelection.length===0?true:false" @click="del=true">删除</el-button>
@@ -170,7 +170,7 @@ export default {
         categories: null,
         cover: null
       },
-
+      depl: true,
       filePath: '',
       listQuery: {
         pageNumber: 1,
@@ -354,6 +354,8 @@ export default {
         })
     },
     deploy() {
+      this.depl = false
+      this.listLoading = true
       request({
         url:
           '/api/article/deployArticle',
@@ -361,6 +363,7 @@ export default {
       })
         .then(response => {
           this.getList()
+          this.depl = true
           this.$notify.error({
             title: response.timestamp,
             message: response.msg
