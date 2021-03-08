@@ -2,8 +2,23 @@
   <div class="app-container">
     <!--工具栏-->
     <el-input v-model="listQuery.title" size="small" style="width: 150px;" prefix-icon="el-icon-search" class="filter-item" placeholder="请输入标题" clearable />
-    <el-input v-model="listQuery.tags" size="small" style="width: 150px;" prefix-icon="el-icon-search" class="filter-item" placeholder="请输入标签" clearable />
-    <el-input v-model="listQuery.categories" size="small" style="width: 150px;" prefix-icon="el-icon-search" class="filter-item" placeholder="请输入分类" clearable />
+    <el-select v-model="listQuery.tags" size="small" style="width: 150px;" clearable filterable placeholder="请选择标签">
+      <el-option
+        v-for="item in tagsList"
+        :key="item"
+        :label="item"
+        :value="item"
+      />
+    </el-select>
+    <el-select v-model="listQuery.categories" size="small" style="width: 150px;" clearable filterable placeholder="请选择分类">
+      <el-option
+        v-for="item in categorieList"
+        :key="item"
+        :label="item"
+        :value="item"
+      />
+    </el-select>
+
     <date-range-picker
       v-model="date"
       size="small"
@@ -162,6 +177,8 @@ export default {
         })
     }
     return {
+      tagsList: '',
+      categorieList: '',
       fileDB: false,
       dialogVisible: false,
       addArticleHead: {
@@ -204,6 +221,8 @@ export default {
   },
   methods: {
     getList(callback) {
+      this.getCategorie()
+      this.getTags()
       this.listLoading = true
       request({
         url:
@@ -220,6 +239,32 @@ export default {
           if (callback != null) {
             callback()
           }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    getCategorie() {
+      request({
+        url:
+          '/api/article/showCategorie',
+        method: 'get'
+      })
+        .then(response => {
+          this.categorieList = response.data
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    getTags() {
+      request({
+        url:
+          '/api/article/showTags',
+        method: 'get'
+      })
+        .then(response => {
+          this.tagsList = response.data
         })
         .catch(error => {
           console.log(error)
