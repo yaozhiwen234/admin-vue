@@ -59,8 +59,6 @@
 import { upload } from '@/utils/upload'
 import { mapGetters } from 'vuex'
 import request from '@/utils/request'
-import qs from 'qs'
-
 export default {
   name: 'Markdown',
   data() {
