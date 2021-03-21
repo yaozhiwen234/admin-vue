@@ -7,13 +7,13 @@ function resolve(dir) {
 }
 
 const name = defaultSettings.title // 网址标题
-const port = 443 // 端口配置
+const port = 8013 // 端口配置
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
   // hash 模式下可使用
-  // publicPath: process.env.NODE_ENV === 'development' ? '/' : './',
-  publicPath: '/',
+  publicPath: process.env.NODE_ENV === 'development' ? '/' : './',
+  // publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
@@ -28,10 +28,9 @@ module.exports = {
     proxy: {
       '/api': {
         target: process.env.VUE_APP_BASE_API,
-        ws: true,
         changeOrigin: true,
         pathRewrite: {
-          '^/api': '/'
+          '^/api': 'api'
         }
       },
       '/auth': {

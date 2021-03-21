@@ -212,7 +212,7 @@ export default {
         url:
           '/api/article/addArticle',
         method: 'put',
-        data: qs.stringify(this.listQuery, { indices: false })
+        data: this.listQuery
       })
         .then(response => {
           if (response.code === 200) {
