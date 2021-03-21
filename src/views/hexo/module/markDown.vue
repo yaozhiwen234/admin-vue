@@ -210,9 +210,9 @@ export default {
       this.listQuery.operation = operation
       request({
         url:
-          '/api/article/addArticle?' +
-            qs.stringify(this.listQuery, { indices: false }),
-        method: 'put'
+          '/api/article/addArticle',
+        method: 'put',
+        data: qs.stringify(this.listQuery, { indices: false })
       })
         .then(response => {
           if (response.code === 200) {
