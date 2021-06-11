@@ -433,10 +433,14 @@ export default {
         })
     },
     addfileDB() {
+      var file = {
+        'filePath': this.filePath
+      }
       request({
         url:
           '/api/article/fileWriteDb?filePath=' + this.filePath,
-        method: 'post'
+        method: 'post',
+        data: JSON.stringify(file)
       })
         .then(response => {
           this.fileDB = false
