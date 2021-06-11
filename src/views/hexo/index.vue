@@ -372,7 +372,21 @@ export default {
           console.log(error)
         })
     },
+    getText(row) {
+      request({
+        url:
+          '/api/article/showTest?id=' + row.id + '&title=' + row.title,
+        method: 'get'
+      })
+        .then(response => {
+          return response.data.text
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
     hreftwo(row, view) {
+      row.text = this.getText(row)
       this.$router.push(
         { path: '/hexo/module/markDown',
           query: {
