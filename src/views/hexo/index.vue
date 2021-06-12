@@ -380,7 +380,7 @@ export default {
         method: 'get'
       })
         .then(response => {
-          row.text = response.data.text
+          row.text = response.data.data.text
           this.$router.push(
             { path: '/hexo/module/markDown',
               query: {
