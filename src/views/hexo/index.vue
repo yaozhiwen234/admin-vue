@@ -374,13 +374,18 @@ export default {
     },
 
     hreftwo(row, view) {
+      console.log('<><><>')
       request({
         url:
           '/api/article/showTest?id=' + row.id + '&title=' + row.title,
         method: 'get'
       })
         .then(response => {
+          console.log('MMMMMMM')
+
           row.text = response.data.data.text
+          console.log('<>' + row.text)
+
           this.$router.push(
             { path: '/hexo/module/markDown',
               query: {
