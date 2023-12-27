@@ -33,7 +33,13 @@
       <el-table-column :show-overflow-tooltip="true" prop="shellUserName" label="登录用户名" min-width="15%" />
       <el-table-column :show-overflow-tooltip="true" prop="shellUserPassword" label="登陆密码" min-width="25%" />
       <el-table-column :show-overflow-tooltip="true" prop="shellCommand" label="执行命令" min-width="30%" />
-      <el-table-column :show-overflow-tooltip="true" prop="statusVal" label="执行状态" min-width="15%" />
+      <el-table-column :show-overflow-tooltip="true" prop="statusVal" label="执行状态" min-width="15%">
+        <template slot-scope="scope">
+          <span :style="classObje(scope.row.status)">
+            {{ scope.row.statusVal }}
+          </span>
+        </template>
+      </el-table-column>
       <el-table-column :show-overflow-tooltip="true" prop="createTime" label="创建日期" min-width="25%" />
       <el-table-column min-width="25%" prop="updateTime" label="编辑时间" />
 
@@ -109,6 +115,20 @@ export default {
         ip: null,
         startTime: null,
         endTime: null
+      }
+    }
+  },
+
+  computed: {
+    classObje(totalGrade) {
+      return (totalGrade) => {
+        if (totalGrade === 2) {
+          return { color: 'red' }
+        } else if (totalGrade === 0) {
+          return { color: '#000000' }
+        } else if (totalGrade === 1) {
+          return { color: '#13ce66' }
+        }
       }
     }
   },
