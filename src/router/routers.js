@@ -68,6 +68,30 @@ export const constantRouterMap = [
       component: (resolve) => require(['@/views/hexo/module/markDown'], resolve),
       meta: { title: '编辑文本' }
     }]
+  },
+  {
+    path: '/shell',
+    component: Layout,
+    hidden: true,
+    redirect: 'noredirect',
+    children: [{
+      path: '/shell/shellBase/',
+      name: 'shellBase',
+      component: (resolve) => require(['@/views/shell/shellBase'], resolve),
+      meta: { title: '添加shell分组' }
+    }]
+  },
+  {
+    path: '/shell',
+    component: Layout,
+    hidden: true,
+    redirect: 'noredirect',
+    children: [{
+      path: '/shell/executeCommand/',
+      name: 'executeCommand',
+      component: (resolve) => require(['@/views/shell/executeCommand'], resolve),
+      meta: { title: '执行shell命令' }
+    }]
   }
 ]
 
