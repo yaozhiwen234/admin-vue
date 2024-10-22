@@ -82,7 +82,7 @@ export const constantRouterMap = [
     }]
   },
   {
-    path: '/shell',
+    path: '/shell1',
     component: Layout,
     hidden: true,
     redirect: 'noredirect',

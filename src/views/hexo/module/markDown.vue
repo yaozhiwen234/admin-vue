@@ -10,6 +10,27 @@
         <el-button v-if="view=='preview'" class="filter-item" size="small" style="float: right;width: 80px;" align="center" type="warning" @click="hreftwo()">退出</el-button>
       </el-row>
     </div>
+    <el-row>
+      <mavon-editor
+        v-if="view=='preview'"
+        ref="md"
+        v-model="listQuery.text"
+        :ishljs="true"
+        :subfield="false"
+        :toolbars-flag="prop.toolbarsFlag"
+        :editable="prop.editable"
+        :scroll-style="prop.scrollStyle"
+        :default-open="prop.defaultOpen"
+        :style="'height:' + height"
+      />
+      <mavon-editor
+        v-else
+        ref="md"
+        v-model="listQuery.text"
+        :style="'height:' + height"
+        @save="add('ctrls')"
+      />
+    </el-row>
     <el-row />
     <el-dialog
       title="上传MarkDown文件"
